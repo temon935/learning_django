@@ -1,0 +1,50 @@
+{% extends 'main/base.html' %}
+
+{%  block title %}
+Создать задачу
+{% endblock %}
+
+{%  block content %}
+    <h2>Section title</h2>
+    <div class="table-responsive">
+      <form method="post">
+        <h3>{{ form.day_of_workout }}</h3>
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th>№ упр</th>
+              <th>Название</th>
+              <th>Вес</th>
+              <th>Количество повторов</th>
+              <th>Номер подхода</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% if exercise %}
+            {% for el in exercise %}
+                <tr>
+                  <td>{{el.num_ex}}</td>
+                  <td>{{el.name_of_ex}}</td>
+                  <td>{{el.weight}}</td>
+                  <td>{{el.num_of_repeat}}</td>
+                  <td>{{el.numb_of_appr}}</td>
+                </tr>
+            {% endfor %}
+          {% else %}
+            <p>Нет тренировок</p>
+          {% endif %}
+          <tr>
+            {% csrf_token %}
+            <td>{{ form.num_ex }}</td>
+            <td>{{ form.name_of_ex }}</td>
+            <td>{{ form.weight }}</td>
+            <td>{{ form.num_of_repeat }}</td>
+            <td>{{ form.numb_of_appr }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <button type="submit" class="btn btn-success">Добавить</button>
+            <span>{{ error }}</span>
+        </form>
+      </div>
+{% endblock %}
